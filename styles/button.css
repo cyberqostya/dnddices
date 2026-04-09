@@ -1,0 +1,63 @@
+.button {
+  /* padding: 5px 10px; */
+  padding: 10px;
+  border-radius: 6px;
+
+  font-size: 14px;
+  flex-shrink: 0;
+  touch-action: manipulation;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button._dice {
+  background-color: var(--color-gray-100);
+  color: var(--color-black-100);
+
+  min-width: 45px;
+
+  -webkit-tap-highlight-color: rgba(94, 84, 70, 0.3);
+}
+
+.button._settings {
+  background-color: var(--color-gold);
+  color: #fff;
+  letter-spacing: -1px;
+  opacity: 0.3;
+}
+.button._settings._active {
+  opacity: 1;
+}
+.button._settings:nth-child(3) {
+  margin-left: auto;
+}
+.button._coin {
+  padding: 5px;
+  background: linear-gradient(-45deg, #6a0dad, gold, #23a6d5, #23d5ab);
+  animation: gradientFlow 8s ease infinite;
+  background-size: 400% 400%;
+}
+.button._coin img {
+  width: 24px;
+  height: 24px;
+}
+@keyframes gradientFlow {
+  0% {
+    background-position: 100% 100%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 0% 0%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}

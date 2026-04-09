@@ -1,0 +1,94 @@
+.dice {
+  max-width: 270px;
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  transition: opacity 0.4s, filter 0.4s;
+}
+.dices._xs .dice {
+  width: 50%;
+}
+.dices._s .dice {
+  width: 43%;
+}
+.dices._m .dice {
+  width: 33%;
+}
+.dices._l .dice {
+  width: 30%;
+}
+.dices._xl .dice {
+  width: 25%;
+}
+.dices._xxl .dice {
+  width: 21%;
+}
+.dices._xxxl .dice {
+  width: 17%;
+}
+
+.dice._blured img {
+  opacity: 0.4;
+  filter: blur(1.5px);
+}
+
+.dice__result {
+  position: absolute;
+  inset: 0;
+  bottom: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* font-size: JavaScript */
+  font-family: "Jaini", Arial, Helvetica, sans-serif;
+  color: var(--color-gray-300);
+
+  scale: 0;
+}
+.dice__result._active {
+  scale: 1;
+  transition: scale 0.4s;
+}
+
+.dice__cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 0.3em;
+  min-width: 18px;
+
+  scale: 0;
+  transition: scale 0.25s;
+}
+.dice__cross._active {
+  scale: 1;
+}
+
+.reroll-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 1em;
+  height: 1em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  color: #fff;
+  background-color: var(--color-gold);
+
+  font-size: clamp(18px, 0.2em, 0.2em);
+  line-height: 1;
+  text-align: center;
+  padding: 0.1em;
+
+  scale: 2;
+  opacity: 0;
+}
+.reroll-counter._active {
+  opacity: 1;
+  scale: 1;
+  transition: scale 0.25s;
+}

@@ -1,0 +1,14 @@
+.cross {
+  width: 18px;
+  aspect-ratio: 1;
+  display: block;
+  flex-shrink: 0;
+  background: center/93% no-repeat;
+}
+
+.cross._dark {
+  background-image: url("../images/cross_dark.svg");
+}
+.cross._light {
+  background-image: url("../images/cross_light.svg");
+}

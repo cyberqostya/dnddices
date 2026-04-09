@@ -1,0 +1,25 @@
+.buttons-container {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: var(--color-back);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow-x: scroll;
+}
+.buttons-container::-webkit-scrollbar {
+  height: 0;
+}
+
+.buttons-container._top {
+  justify-content: left;
+  border-bottom: 1px dashed var(--color-gray-100);
+}
+
+@media (width >= 415px) {
+  .buttons-container {
+    justify-content: center;
+    overflow-x: auto;
+  }
+}

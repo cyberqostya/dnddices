@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DnD dices</title>
+    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./index.css" />
+
+    <script>
+      // service-worker
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then(() => console.log("Service Worker зарегистрирован"))
+          .catch((err) => console.error("Ошибка регистрации SW:", err));
+      }
+    </script>
+  </head>
+  <body>
+    <main class="main">
+      <!--  -->
+      <div class="buttons-container _top">
+        <a class="button _coin" href="https://t.me/tribute/app?startapp=dq66" target="_blank">
+          <img src="/images/coin.png" />
+        </a>
+      </div>
+      <!--  -->
+      <div class="total">
+        <span class="total__text"></span>
+        <span class="total__placeholder _active">{sum}</span>
+      </div>
+
+      <div class="dices _empty" role="button"></div>
+
+      <footer class="footer">
+        <div role="button" class="dice-tower _empty">
+          <button class="cross _light"></button>
+          <p class="dice-tower__text"></p>
+          <button class="cross _light"></button>
+        </div>
+
+        <div class="buttons-container">
+          <button class="button _dice">d2</button>
+          <button class="button _dice">d4</button>
+          <button class="button _dice">d6</button>
+          <button class="button _dice">d8</button>
+          <button class="button _dice">d10</button>
+          <button class="button _dice">d12</button>
+          <button class="button _dice">d20</button>
+          <button class="button _dice">d100</button>
+          <!-- <div>|</div> -->
+        </div>
+      </footer>
+    </main>
+
+    <div class="ban-interface"></div>
+
+    <script src="./index.js" type="module"></script>
+  </body>
+</html>

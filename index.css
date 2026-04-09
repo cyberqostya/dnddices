@@ -1,0 +1,257 @@
+@import url("./styles/buttons-container.css");
+@import url("./styles/button.css");
+@import url("./styles/cross.css");
+@import url("./styles/dice.css");
+
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 400;
+  src: url("./fonts/OpenSans-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 500;
+  src: url("./fonts/OpenSans-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Jaini";
+  font-weight: 500;
+  src: url("./fonts/JainiPurva-Regular.woff2") format("woff2");
+}
+
+* {
+  user-select: none;
+}
+
+body {
+  --color-back: #ebe5d0;
+  --color-back-second: #f3f1db;
+  --color-gray-100: rgba(94, 84, 70, 0.22);
+  --color-gray-200: #6a6a6a;
+  --color-gray-300: #4f4f4f;
+  --color-black-100: #1d1d1d;
+  --color-blue-100: #3567c9;
+  --color-luck: #0cb70c;
+  --color-unluck: #ff3e3e;
+  --color-gold: #f0a020;
+
+  font-family: "OpenSans", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  margin: 0;
+  overflow: hidden;
+  height: 100svh;
+
+  background-color: var(--color-back);
+  color: var(--color-black-100);
+}
+
+button {
+  border: none;
+  padding: 0;
+  outline: none;
+  background: none;
+  display: block;
+  line-height: 1;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+span,
+p {
+  margin: 0;
+  line-height: 1;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.ban-interface {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.ban-interface._disabled {
+  pointer-events: all;
+}
+
+.total {
+  height: 90px;
+  width: 100%;
+  border-bottom: 1px dashed var(--color-gray-100);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+.total__text {
+  font-family: "Jaini", Arial, Helvetica, sans-serif;
+  color: var(--color-blue-100);
+  font-size: 90px;
+
+  position: absolute;
+  inset: 0;
+  top: -0.065em;
+  text-align: center;
+  pointer-events: none;
+
+  scale: 0;
+}
+.total__text._active {
+  scale: 1;
+  transition: scale 0.4s;
+}
+.total__placeholder {
+  color: var(--color-gray-200);
+  font-size: 16px;
+  font-style: italic;
+
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  opacity: 0;
+}
+.total__placeholder._active {
+  opacity: 1;
+}
+
+.dices {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  row-gap: 15px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.dices._empty {
+  flex-direction: column;
+  pointer-events: none;
+}
+.dices._empty::before {
+  content: "{dices}";
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dice-tower {
+  background-color: var(--color-gray-100);
+  font-size: 14px;
+  font-style: italic;
+  /* padding-inline: 10px; */
+  padding-inline: 5px;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: all;
+  width: calc(100% - 5px * 2);
+  box-sizing: border-box;
+  gap: 5px;
+  /* gap: 10px; */
+}
+
+.dice-tower._empty {
+  border-top: 1px dashed var(--color-gray-100);
+  border-bottom: 1px dashed var(--color-gray-100);
+  border-radius: 0;
+  width: 100%;
+  pointer-events: none;
+  background-color: transparent;
+  padding: 7px 10px 9px;
+}
+.dice-tower._empty::before {
+  content: "{reset}";
+}
+.dice-tower._empty .cross {
+  display: none;
+}
+.dice-tower._empty .dice-tower__text {
+  display: none;
+}
+
+.dice-tower b {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.dice-tower__text {
+  display: block;
+  white-space: nowrap;
+  overflow-x: scroll;
+  padding: 10px 1px;
+  margin: 0 auto;
+}
+.dice-tower__text::-webkit-scrollbar {
+  height: 0;
+}
+
+.dice-tower img {
+  width: 10px;
+  border-radius: 50%;
+  background-color: var(--color-back);
+  padding: 4px;
+  display: block;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+._empty {
+  font-style: italic;
+  color: var(--color-gray-200);
+  touch-action: manipulation;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+._unluck {
+  color: var(--color-unluck);
+}
+._luck {
+  color: var(--color-luck);
+}
+
+@media (min-width: 600px) {
+  .main {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 1px dashed var(--color-gray-100);
+    border-right: 1px dashed var(--color-gray-100);
+  }
+}
