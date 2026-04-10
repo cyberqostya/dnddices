@@ -18,7 +18,7 @@
 }
 
 .is-telegram .buttons-container._top {
-  margin-top: 64px;
+  margin-top: 24px;
 }
 
 @media (width >= 415px) {
