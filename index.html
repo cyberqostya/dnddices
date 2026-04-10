@@ -21,11 +21,15 @@
   <script src="https://telegram.org"></script>
   <script>
     const tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.ready();
-    if (tg.isVersionAtLeast('7.0')) {
-      tg.requestFullscreen(); // Это уберет даже заголовок бота (если разрешено настройками)
+    function expandApp() {
+      tg.ready();
+      tg.expand();
+      if (tg.requestFullscreen) {
+        tg.requestFullscreen();
+      }
     }
+    expandApp();
+    setTimeout(expandApp, 200);
   </script>
 </head>
 
