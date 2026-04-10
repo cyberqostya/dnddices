@@ -17,6 +17,13 @@
         .catch((err) => console.error("Ошибка регистрации SW:", err));
     }
   </script>
+
+  <script src="https://telegram.org"></script>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.ready();
+  </script>
 </head>
 
 <body>
