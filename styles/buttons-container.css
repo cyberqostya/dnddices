@@ -17,6 +17,10 @@
   border-bottom: 1px dashed var(--color-gray-100);
 }
 
+.is-telegram .buttons-container {
+  margin-top: 80px;
+}
+
 @media (width >= 415px) {
   .buttons-container {
     justify-content: center;

@@ -1,4 +1,6 @@
 import getMathSign from "./helpers.js";
+import { initAudioLifecycle, loadAudioBuffer, playAudioBuffer } from "./audio.js";
+import { triggerHaptic } from "./telegram.js";
 
 export default class Dice {
   ANIMATION_DURATION = 600;
@@ -6,6 +8,7 @@ export default class Dice {
   FAILURE_MODIFIER = 0.25;
   ROLL_SOUNDS = ["./sounds/roll1.mp3", "./sounds/roll2.mp3", "./sounds/roll3.mp3", "./sounds/roll4.mp3"];
   COIN_SOUND = "./sounds/coin.mp3";
+  audioReady;
 
   constructor(edges) {
     this.edges = edges;
@@ -24,7 +27,7 @@ export default class Dice {
     this.result = 0;
 
     this.createNode();
-    this.initSound();
+    this.audioReady = this.initSound();
   }
 
   createNode() {
@@ -79,6 +82,7 @@ export default class Dice {
       }
     }
 
+    triggerHaptic("medium");
     this.playSound();
     this.animate();
     setTimeout(this.showResult, this.ANIMATION_DURATION * 0.8);
@@ -152,8 +156,7 @@ export default class Dice {
     // Создание контекста при первом создании кубика
     // Чтобы избежать ошибки, пока юзер не совершил событие
     // А также контекст один на все приложение для оптимальной работы
-    if (window.audioCtx === undefined) window.audioCtx = new AudioContext();
-    if (audioCtx.state === "suspended") audioCtx.resume();
+    initAudioLifecycle();
 
     // Отдельный звук для монетки
     let soundLink;
@@ -163,16 +166,11 @@ export default class Dice {
       soundLink = this.ROLL_SOUNDS[Math.floor(Math.random() * this.ROLL_SOUNDS.length)];
     }
 
-    const response = await fetch(soundLink);
-    const arrayBuffer = await response.arrayBuffer();
-    const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-    this.buffer = audioBuffer;
+    this.buffer = await loadAudioBuffer(soundLink);
   }
-  playSound() {
-    const source = audioCtx.createBufferSource();
-    source.buffer = this.buffer;
-    source.connect(audioCtx.destination);
-    source.start();
+  async playSound() {
+    await this.audioReady;
+    await playAudioBuffer(this.buffer);
   }
 
   // ===== Редактирование =====
@@ -211,7 +209,7 @@ export default class Dice {
           duration: this.RANDOM_SHAKE_DURATION,
           iterations: Infinity,
           easing: "linear",
-        }
+        },
       );
     } else {
       this.shakeAnimationID.cancel();

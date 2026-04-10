@@ -1,11 +1,21 @@
 const tg = window.Telegram?.WebApp;
 
-function initApp() {
-  if (tg) {
-    tg.ready();
-  }
+export function isTelegramWebApp() {
+  return Boolean(tg && tg.platform !== "unknown");
+}
 
-  if (tg.platform !== "unknown") {
+export function triggerHaptic(type = "light") {
+  if (!isTelegramWebApp() || !tg?.HapticFeedback) return;
+
+  tg.HapticFeedback.impactOccurred(type);
+}
+
+function initApp() {
+  if (!tg) return;
+
+  tg.ready();
+
+  if (isTelegramWebApp()) {
     document.body.classList.add("is-telegram");
     tg.disableVerticalSwipes();
   }
@@ -16,11 +26,3 @@ if (document.readyState === "loading") {
 } else {
   initApp();
 }
-
-setTimeout(() => {
-  document.querySelector(".button._settings").addEventListener("click", () => {
-    if (tg?.HapticFeedback) {
-      tg.HapticFeedback.impactOccurred("light");
-    }
-  });
-}, 5000);

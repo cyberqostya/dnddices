@@ -1,5 +1,6 @@
 import Dice from "./js/dice.js";
 import SettingsButton from "./js/settingsButton.js";
+import { triggerHaptic } from "./js/telegram.js";
 import Total from "./js/total.js";
 
 // ===== Переменные ===== //
@@ -200,7 +201,10 @@ function renderDicesQuantityText() {
   diceTowerTextNode.innerHTML = result.map((i) => (i[0] === 1 ? "" : `<b>${i[0]}</b>`) + "d" + i[1]).join("&nbsp;+ ");
 }
 
-diceTowerNode.addEventListener("click", resetDices);
+diceTowerNode.addEventListener("click", () => {
+  triggerHaptic("light");
+  resetDices();
+});
 
 // ===== Рендер ===== //
 
@@ -220,6 +224,7 @@ diceButtonsNodes.forEach((diceButtonNode) => {
     // Превышение максимально возможного количества кубиков
     if (dices.length === MAX_DICES_QUANTITY) return;
 
+    triggerHaptic("light");
     const edges = Number(this.textContent.match(/\d+/g)[0]);
     dices.push(new Dice(edges));
     render();

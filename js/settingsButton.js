@@ -1,6 +1,8 @@
 // Класс который имеет состояние кнопки активности и перекрашивает ее по клику
 // а затем выполняет побочные действия из переданного колбека
 
+import { triggerHaptic } from "./telegram.js";
+
 export default class SettingsButton {
   constructor({ isActive, title, callback }) {
     this.isActive = isActive;
@@ -14,6 +16,7 @@ export default class SettingsButton {
   toggle = () => {
     this.isActive = !this.isActive;
     this.render();
+    triggerHaptic("light");
 
     this.callback();
   };
