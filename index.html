@@ -20,20 +20,7 @@
   </script>
 
   <script src="https://telegram.org"></script>
-  <script>
-    const tg = window.Telegram.WebApp;
-    function expandApp() {
-      tg.ready();
-      tg.expand();
-    }
-    expandApp();
-    setTimeout(expandApp, 200);
-    document.querySelector('.total').addEventListener('click', () => {
-      if (tg.isVersionAtLeast('7.0')) {
-        tg.requestFullscreen();
-      }
-    });
-  </script>
+  <script src="./js/telegram.js" type="module"></script>
 </head>
 
 <body>
