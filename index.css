@@ -39,7 +39,7 @@ body {
   font-weight: 500;
   margin: 0;
   overflow: hidden;
-  height: var(--tg-viewport-stable-height, 100dvh);
+  height: 100dvh;
 
   background-color: var(--color-back);
   color: var(--color-black-100);
