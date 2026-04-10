@@ -23,6 +23,9 @@
     const tg = window.Telegram.WebApp;
     tg.expand();
     tg.ready();
+    if (tg.isVersionAtLeast('7.0')) {
+      tg.requestFullscreen(); // Это уберет даже заголовок бота (если разрешено настройками)
+    }
   </script>
 </head>
 
