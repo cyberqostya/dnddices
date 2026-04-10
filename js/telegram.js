@@ -20,6 +20,8 @@ setTimeout(() => {
   document.querySelector(".button._settings").addEventListener("click", () => {
     if (tg?.HapticFeedback) {
       tg.HapticFeedback.notificationOccurred("success");
+      tg.HapticFeedback.notificationOccurred("warning");
     }
+    console.log(1);
   });
 }, 5000);
