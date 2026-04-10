@@ -19,7 +19,7 @@ if (document.readyState === "loading") {
 setTimeout(() => {
   document.querySelector(".button._settings").addEventListener("click", () => {
     if (tg?.HapticFeedback) {
-      tg.HapticFeedback.impactOccurred("light");
+      tg.HapticFeedback.notificationOccurred("success");
     }
   });
 }, 5000);
