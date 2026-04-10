@@ -1,7 +1,9 @@
 const tg = window.Telegram.WebApp;
 
 function initApp() {
-  if (tg.initData !== "") {
+  tg.ready();
+
+  if (tg.platform !== "unknown") {
     document.body.classList.add("is-telegram");
   }
 }
@@ -12,4 +14,6 @@ if (document.readyState === "loading") {
   initApp();
 }
 
-tg.HapticFeedback.impactOccurred("light");
+document.querySelector(".button._settings").addEventListener("click", () => {
+  tg.HapticFeedback.impactOccurred("light");
+});
