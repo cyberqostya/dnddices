@@ -1,11 +1,12 @@
 import getMathSign from "./helpers.js";
-import { initAudioLifecycle, loadAudioBuffer, playAudioBuffer } from "./audio.js";
+import { initAudioLifecycle, loadAudioAsset, playAudioAsset } from "./audio.js";
 import { triggerHaptic } from "./telegram.js";
 
 export default class Dice {
   ANIMATION_DURATION = 600;
   SUCCESS_MODIFIER = 0.75;
   FAILURE_MODIFIER = 0.25;
+  HAPTIC_RHYTHM = [1, 1, 2];
   ROLL_SOUNDS = ["./sounds/roll1.mp3", "./sounds/roll2.mp3", "./sounds/roll3.mp3", "./sounds/roll4.mp3"];
   COIN_SOUND = "./sounds/coin.mp3";
   audioReady;
@@ -82,8 +83,8 @@ export default class Dice {
       }
     }
 
-    triggerHaptic("heavy");
-    this.playSound();
+    this.playRollHaptics();
+    void this.playSound();
     this.animate();
     setTimeout(this.showResult, this.ANIMATION_DURATION * 0.8);
 
@@ -150,6 +151,21 @@ export default class Dice {
     }
   }
 
+  playRollHaptics() {
+    const rhythmDuration = this.ANIMATION_DURATION * 0.5;
+    const totalUnits = this.HAPTIC_RHYTHM.reduce((sum, value) => sum + value, 0);
+    const unitDuration = rhythmDuration / totalUnits;
+    let elapsed = 0;
+
+    this.HAPTIC_RHYTHM.forEach((note, index) => {
+      setTimeout(() => {
+        triggerHaptic(index === this.HAPTIC_RHYTHM.length - 1 ? "medium" : "light");
+      }, elapsed);
+
+      elapsed += note * unitDuration;
+    });
+  }
+
   // ===== Звук броска =====
 
   async initSound() {
@@ -166,11 +182,12 @@ export default class Dice {
       soundLink = this.ROLL_SOUNDS[Math.floor(Math.random() * this.ROLL_SOUNDS.length)];
     }
 
-    this.buffer = await loadAudioBuffer(soundLink);
+    const arrayBuffer = await loadAudioAsset(soundLink);
+    this.buffer = { arrayBuffer, decodedBuffer: null };
   }
   async playSound() {
     await this.audioReady;
-    await playAudioBuffer(this.buffer);
+    await playAudioAsset(this.buffer);
   }
 
   // ===== Редактирование =====

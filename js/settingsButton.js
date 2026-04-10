@@ -2,7 +2,7 @@
 // а затем выполняет побочные действия из переданного колбека
 
 import { triggerHaptic } from "./telegram.js";
-import { initAudioLifecycle, loadAudioBuffer, playAudioBuffer } from "./audio.js";
+import { initAudioLifecycle, loadAudioAsset, playAudioAsset } from "./audio.js";
 
 export default class SettingsButton {
   audioReady;
@@ -24,20 +24,26 @@ export default class SettingsButton {
   // ===== Звук кнопки =====
   async initSound() {
     initAudioLifecycle();
-    if (this.soundOn) this.soundOnBuffer = await loadAudioBuffer(this.soundOn);
-    if (this.soundOff) this.soundOffBuffer = await loadAudioBuffer(this.soundOff);
+    if (this.soundOn) {
+      const arrayBuffer = await loadAudioAsset(this.soundOn);
+      this.soundOnBuffer = { arrayBuffer, decodedBuffer: null };
+    }
+    if (this.soundOff) {
+      const arrayBuffer = await loadAudioAsset(this.soundOff);
+      this.soundOffBuffer = { arrayBuffer, decodedBuffer: null };
+    }
   }
   async playSound() {
     await this.audioReady;
     const buffer = this.isActive ? this.soundOnBuffer : this.soundOffBuffer;
-    await playAudioBuffer(buffer);
+    await playAudioAsset(buffer);
   }
 
   toggle = () => {
     this.isActive = !this.isActive;
     this.render();
     triggerHaptic("light");
-    this.playSound();
+    void this.playSound();
 
     this.callback();
   };
