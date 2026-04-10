@@ -7,6 +7,7 @@ function initApp() {
 
   if (tg.platform !== "unknown") {
     document.body.classList.add("is-telegram");
+    tg.disableVerticalSwipes();
   }
 }
 
@@ -19,9 +20,7 @@ if (document.readyState === "loading") {
 setTimeout(() => {
   document.querySelector(".button._settings").addEventListener("click", () => {
     if (tg?.HapticFeedback) {
-      tg.HapticFeedback.notificationOccurred("success");
-      tg.HapticFeedback.notificationOccurred("warning");
+      tg.HapticFeedback.impactOccurred("light");
     }
-    console.log(1);
   });
 }, 5000);
