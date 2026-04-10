@@ -174,7 +174,7 @@ img {
   width: 100%;
 }
 .is-telegram .footer {
-  background: cyan;
+  margin-bottom: 10px;
 }
 
 .dice-tower {

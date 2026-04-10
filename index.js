@@ -11,6 +11,10 @@ const total = new Total(); // Сумма всех бросков
 const dicesContainerNode = document.querySelector(".dices"); // Контейнер, где крутятся кубики
 const MAX_DICES_QUANTITY = 25;
 
+const karmaButtonNode = document.querySelector("._karma");
+const editButtonNode = document.querySelector("._edit");
+const rerollButtonNode = document.querySelector("._reroll");
+
 const diceTowerNode = document.querySelector(".dice-tower"); // Кнопка сброса кубиков
 const diceTowerTextNode = diceTowerNode.querySelector(".dice-tower__text"); // Текст кнопки сброса кубиков (добавленные кубики)
 
@@ -37,8 +41,10 @@ window.settings = {
   karma: {
     counter: 0,
     button: new SettingsButton({
+      node: karmaButtonNode,
       isActive: true,
-      title: "KARMA",
+      soundOn: "./sounds/karmaon.mp3",
+      soundOff: "./sounds/karmaoff.mp3",
       callback: () => {
         settings.karma.counter = 0;
         clearResults();
@@ -48,8 +54,8 @@ window.settings = {
   // Редактирование
   edit: {
     button: new SettingsButton({
+      node: editButtonNode,
       isActive: false,
-      title: "EDIT",
       callback: () => {
         if (settings.edit.button.isActive) {
           window.addEventListener("click", deleteDice, true);
@@ -77,8 +83,8 @@ window.settings = {
   // Переброс
   reroll: {
     button: new SettingsButton({
+      node: rerollButtonNode,
       isActive: false,
-      title: "REROLL",
       callback: () => {
         if (settings.reroll.button.isActive) {
           window.addEventListener("click", reroll, true);
@@ -229,12 +235,6 @@ diceButtonsNodes.forEach((diceButtonNode) => {
     dices.push(new Dice(edges));
     render();
   });
-});
-
-// ===== Кнопки настроек ===== //
-
-Object.keys(settings).forEach((key) => {
-  document.querySelector(".buttons-container._top").insertAdjacentElement("afterbegin", settings[key].button.node);
 });
 
 // ===== Удаление кубиков по одному ===== //

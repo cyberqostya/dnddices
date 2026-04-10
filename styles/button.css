@@ -31,7 +31,7 @@
 .button._settings._active {
   opacity: 1;
 }
-.button._settings:nth-child(3) {
+.button._settings._karma {
   margin-left: auto;
 }
 .button._coin {

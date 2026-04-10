@@ -82,7 +82,7 @@ export default class Dice {
       }
     }
 
-    triggerHaptic("medium");
+    triggerHaptic("heavy");
     this.playSound();
     this.animate();
     setTimeout(this.showResult, this.ANIMATION_DURATION * 0.8);
