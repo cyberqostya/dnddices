@@ -20,10 +20,3 @@
 .is-telegram .buttons-container._top {
   margin-top: 42px;
 }
-
-@media (width >= 415px) {
-  .buttons-container {
-    justify-content: center;
-    overflow-x: auto;
-  }
-}

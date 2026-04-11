@@ -16,6 +16,7 @@
 .button._dice {
   background-color: var(--color-gray-100);
   color: var(--color-black-100);
+  flex-grow: 1;
 
   min-width: 45px;
 

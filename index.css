@@ -99,7 +99,7 @@ img {
   inset: 0;
   z-index: 10;
 }
-.ban-interface._disabled {
+.ban-interface._active {
   pointer-events: all;
 }
 
@@ -136,6 +136,7 @@ img {
   font-size: 16px;
   font-style: italic;
 
+  user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;

@@ -1,14 +1,48 @@
 .cross {
   width: 18px;
   aspect-ratio: 1;
-  display: block;
+  display: inline-block;
   flex-shrink: 0;
-  background: center/93% no-repeat;
-}
+  border-radius: 50%;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: middle;
 
-.cross._dark {
-  background-image: url("../images/cross_dark.svg");
-}
-.cross._light {
-  background-image: url("../images/cross_light.svg");
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 56%;
+    height: 10%;
+    border-radius: 5px;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &._dark {
+    background-color: var(--color-gray-200);
+
+    &::before,
+    &::after {
+      background: var(--color-back-second);
+    }
+  }
+
+  &._light {
+    background-color: var(--color-back-second);
+
+    &::before,
+    &::after {
+      background: var(--color-gray-200);
+    }
+  }
 }

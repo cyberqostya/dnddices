@@ -17,6 +17,7 @@ export default class Dice {
     this.resultNode;
     this.crossNode;
     this.rerollCounterNode;
+    this.rerollCounterTextNode;
     this.rerollCounter = 0;
     this.MIN_SUCCESS_ROLL = Math.ceil(this.SUCCESS_MODIFIER * edges);
     this.MAX_FAILURE_ROLL = Math.ceil(this.FAILURE_MODIFIER * edges);
@@ -51,6 +52,10 @@ export default class Dice {
     const rerollCounter = document.createElement("div");
     rerollCounter.classList.add("reroll-counter");
     this.rerollCounterNode = rerollCounter;
+    const rerollCounterText = document.createElement("span");
+    rerollCounterText.classList.add("reroll-counter__text");
+    this.rerollCounterTextNode = rerollCounterText;
+    rerollCounter.appendChild(rerollCounterText);
 
     div.appendChild(img);
     div.appendChild(result);
@@ -238,7 +243,7 @@ export default class Dice {
   reroll() {
     this.roll();
     this.rerollCounter++;
-    this.rerollCounterNode.textContent = this.rerollCounter;
+    this.rerollCounterTextNode.textContent = this.rerollCounter;
   }
 
   switchRerollCounter(mode) {

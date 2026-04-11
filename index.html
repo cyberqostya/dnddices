@@ -10,12 +10,17 @@
   <link rel="stylesheet" href="./index.css" />
 
   <script>
-    // service-worker
+    // turnoff when local dev
+    // Application -> Service Workers -> Update on reload
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("./service-worker.js")
-        .then(() => console.log("Service Worker зарегистрирован"))
-        .catch((err) => console.error("Ошибка регистрации SW:", err));
+      window.addEventListener("load", async () => {
+        try {
+          await navigator.serviceWorker.register("./service-worker.js");
+          console.log("Service Worker registered");
+        } catch (error) {
+          console.error("Service Worker registration failed:", error);
+        }
+      });
     }
   </script>
 

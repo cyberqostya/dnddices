@@ -118,7 +118,7 @@ function renderDicesImages() {
 // ===== Бросок ===== //
 
 dicesContainerNode.addEventListener("click", async () => {
-  banInterfaceNode.classList.add("_disabled");
+  banInterfaceNode.classList.add("_active");
 
   clearResults();
 
@@ -138,7 +138,7 @@ dicesContainerNode.addEventListener("click", async () => {
   total.set(results);
   await new Promise((res) => setTimeout(res, 400));
 
-  banInterfaceNode.classList.remove("_disabled");
+  banInterfaceNode.classList.remove("_active");
 });
 
 // Карма
@@ -256,6 +256,8 @@ function deleteDice(e) {
   const tempClass = { node: tempDice };
   dices = dices.map((i, ind) => (ind !== index ? i : tempClass));
 
+  triggerHaptic("light");
+
   // Лаг на телефоне из-за оптимизации
   // При удалении класса кубика из массива классов переставала анимация тряски
   // Которая перерасчитывалась только при изменении ширины кубика в дом дереве
@@ -273,9 +275,11 @@ function deleteDice(e) {
 // ===== Reroll кубиков по одному ===== //
 async function reroll(e) {
   e.stopPropagation();
-  banInterfaceNode.classList.add("_disabled");
+  banInterfaceNode.classList.add("_active");
 
   const diceNode = e.target.closest(".dice");
+
+  if (e.target == banInterfaceNode) return;
 
   // Нажали не на кубик
   if (!diceNode || diceNode.children.length === 0) {
@@ -301,5 +305,5 @@ async function reroll(e) {
     }
   }
 
-  banInterfaceNode.classList.remove("_disabled");
+  banInterfaceNode.classList.remove("_active");
 }
